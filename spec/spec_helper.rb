@@ -2,7 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
-#require 'rspec/autorun' # This is commented so that zeus doesn't run tests twice
+require 'rspec/autorun' # This is commented so that zeus doesn't run tests twice
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

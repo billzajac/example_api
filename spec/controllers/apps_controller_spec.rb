@@ -25,6 +25,7 @@ describe AppsController do
   # adjust the attributes here as well.
   #let(:valid_attributes) { { "name" => "MyString" } }
   let(:valid_attributes) { attributes_for(:app) }
+  let(:valid_params) { attributes_for(:app).merge(file_upload: Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.txt'), 'text/plain')) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -66,18 +67,18 @@ describe AppsController do
     describe "with valid params" do
       it "creates a new App" do
         expect {
-          post :create, {:app => valid_attributes}, valid_session
+          post :create, {:app => valid_params}, valid_session
         }.to change(App, :count).by(1)
       end
 
       it "assigns a newly created app as @app" do
-        post :create, {:app => valid_attributes}, valid_session
+        post :create, {:app => valid_params}, valid_session
         expect(assigns(:app)).to be_a(App)
         expect(assigns(:app)).to be_persisted
       end
 
       it "redirects to the created app" do
-        post :create, {:app => valid_attributes}, valid_session
+        post :create, {:app => valid_params}, valid_session
         expect(response).to redirect_to(App.last)
       end
     end
@@ -113,13 +114,13 @@ describe AppsController do
 
       it "assigns the requested app as @app" do
         app = App.create! valid_attributes
-        put :update, {:id => app.to_param, :app => valid_attributes}, valid_session
+        put :update, {:id => app.to_param, :app => valid_params}, valid_session
         expect(assigns(:app)).to eq(app)
       end
 
       it "redirects to the app" do
         app = App.create! valid_attributes
-        put :update, {:id => app.to_param, :app => valid_attributes}, valid_session
+        put :update, {:id => app.to_param, :app => valid_params}, valid_session
         expect(response).to redirect_to(app)
       end
     end
@@ -158,4 +159,20 @@ describe AppsController do
     end
   end
 
+  describe "GET download" do
+    describe "with valid params" do
+      it "downloads the requested app" do
+        app = App.create! valid_attributes
+        # Assuming there are no other apps in the database, this
+        # specifies that the App created on the previous line
+        # receives the :update_attributes message with whatever params are
+        # submitted in the request.
+        get :download, {:id => app.to_param}, valid_session
+        expect(assigns(:app)).to eq(app)
+        #expect(response.filename).to eq(app.file_name)
+        #expect(response.mime_type).to eq(app.file_mime_type)
+        expect(response.body).to eq(app.file_data)
+      end
+    end
+  end
 end

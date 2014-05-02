@@ -5,7 +5,9 @@ class CreateApps < ActiveRecord::Migration
       t.text :description
       t.string :author
       t.string :price
-      t.string :file_id
+      t.binary :file_data
+      t.string :file_mime_type
+      t.string :file_name
 
       t.timestamps
     end

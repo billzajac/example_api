@@ -24,7 +24,14 @@ class AppsController < ApplicationController
   # POST /apps
   # POST /apps.json
   def create
-    @app = App.new(app_params)
+    # build an app and pass it into a block to set other attributes
+    @app = App.new(app_params) do |a|
+      if params[:app][:file_upload]
+        a.file_data  = params[:app][:file_upload].read
+        a.file_name  = params[:app][:file_upload].original_filename
+        a.file_mime_type = params[:app][:file_upload].content_type
+      end
+    end
 
     respond_to do |format|
       if @app.save
@@ -40,8 +47,15 @@ class AppsController < ApplicationController
   # PATCH/PUT /apps/1
   # PATCH/PUT /apps/1.json
   def update
+    # build an app and pass it into a block to set other attributes
+    params_with_file_stuff = app_params
+    if params[:app][:file_upload]
+      params_with_file_stuff[:file_data]  = params[:app][:file_upload].read
+      params_with_file_stuff[:file_name]  = params[:app][:file_upload].original_filename
+      params_with_file_stuff[:file_mime_type] = params[:app][:file_upload].content_type
+    end
     respond_to do |format|
-      if @app.update(app_params)
+      if @app.update(params_with_file_stuff)
         format.html { redirect_to @app, notice: 'App was successfully updated.' }
         format.json { render :show, status: :ok, location: @app }
       else
@@ -61,6 +75,11 @@ class AppsController < ApplicationController
     end
   end
 
+  def download
+    @app = App.find(params[:id])
+    send_data(@app.file_data, :type => @app.file_mime_type, :filename => @app.file_name, :disposition => "attachment")
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_app
@@ -69,6 +88,7 @@ class AppsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def app_params
-      params.require(:app).permit(:name, :description, :author, :price, :file_id)
+      params.require(:app).permit(:name, :description, :author, :price, :file_data)
+      #params.require(:app).permit(:name, :description, :author, :price, :file_name, :file_data, :file_mime_type)
     end
 end

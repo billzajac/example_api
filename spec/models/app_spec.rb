@@ -21,7 +21,15 @@ describe App do
     expect(build(:app, price: nil)).not_to be_valid
   end
 
-  it "is invalid without a file_id" do
-    expect(build(:app, file_id: nil)).not_to be_valid
+  it "is invalid without a file_name" do
+    expect(build(:app, file_name: nil)).not_to be_valid
+  end
+
+  it "is invalid without a file_data" do
+    expect(build(:app, file_data: nil)).not_to be_valid
+  end
+
+  it "is invalid without a file_mime_type" do
+    expect(build(:app, file_mime_type: nil)).not_to be_valid
   end
 end

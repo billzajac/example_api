@@ -8,14 +8,18 @@ describe "apps/index" do
         :description => "MyText",
         :author => "some_author",
         :price => "Price",
-        :file_id => "File"
+        :file_name => "File",
+        :file_data => "data",
+        :file_mime_type => "application/octet-stream"
       ),
       stub_model(App,
         :name => "Name",
         :description => "MyText",
         :author => "some_author",
         :price => "Price",
-        :file_id => "File"
+        :file_name => "File",
+        :file_data => "data",
+        :file_mime_type => "application/octet-stream"
       )
     ])
   end
@@ -28,5 +32,6 @@ describe "apps/index" do
     assert_select "tr>td", :text => "some_author", :count => 2
     assert_select "tr>td", :text => "Price".to_s, :count => 2
     assert_select "tr>td", :text => "File".to_s, :count => 2
+    assert_select "tr>td", :text => "application/octet-stream".to_s, :count => 2
   end
 end

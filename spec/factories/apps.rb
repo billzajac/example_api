@@ -6,6 +6,8 @@ FactoryGirl.define do
     description "A totally awesome VR app!"
     author { "author_id_#{rand(0..9)}" }
     price { "#{rand(0..9)}.#{rand(0..9)}#{rand(0..9)}" }
-    file_id "random_hash"
+    file_name { "some_file_name#{rand(0..99)}" }
+    file_data { Random.new.bytes(100) }
+    file_mime_type "application/octet-stream"
   end
 end

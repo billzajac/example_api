@@ -18,8 +18,11 @@
   .field
     = f.label :price
     = f.text_field :price
+  /.field
+  /  = f.label :file_name
+  /  = f.text_field :file_name
   .field
-    = f.label :file_id
-    = f.text_field :file_id
+    = f.label :file_upload, "App File"
+    = f.file_field :file_upload
   .actions
     = f.submit 'Save'

@@ -14,8 +14,13 @@
   = @app.price
 %p
   %b File:
-  = @app.file_id
+  = @app.file_name
+%p
+  %b File Mime Type:
+  = @app.file_mime_type
 
+= link_to 'Download', download_app_path(@app)
+\|
 = link_to 'Edit', edit_app_path(@app)
 \|
 = link_to 'Back', apps_path
