@@ -114,8 +114,13 @@ describe AppsController do
 
       it "assigns the requested app as @app" do
         app = App.create! valid_attributes
+        expect(app.file_name).to eq(valid_attributes[:file_name])
         put :update, {:id => app.to_param, :app => valid_params}, valid_session
         expect(assigns(:app)).to eq(app)
+        # Now reload and make sure the upload worked
+        app.reload
+        expect(app.file_name).not_to eq(valid_attributes[:file_name])
+        expect(app.file_name).to eq("test.txt")
       end
 
       it "redirects to the app" do
