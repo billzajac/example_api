@@ -3,7 +3,7 @@ class CreateApps < ActiveRecord::Migration
     create_table :apps do |t|
       t.string :name
       t.text :description
-      t.integer :author
+      t.string :author
       t.string :price
       t.string :file_id
 

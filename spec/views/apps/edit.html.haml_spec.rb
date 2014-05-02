@@ -5,7 +5,7 @@ describe "apps/edit" do
     @app = assign(:app, stub_model(App,
       :name => "MyString",
       :description => "MyText",
-      :author => 1,
+      :author => "some_author",
       :price => "MyString",
       :file_id => "MyString"
     ))

@@ -23,7 +23,8 @@ describe AppsController do
   # This should return the minimal set of attributes required to create a valid
   # App. As you add validations to App, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  #let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { attributes_for(:app) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -34,7 +35,7 @@ describe AppsController do
     it "assigns all apps as @apps" do
       app = App.create! valid_attributes
       get :index, {}, valid_session
-      assigns(:apps).should eq([app])
+      expect(assigns(:apps)).to eq([app])
     end
   end
 
@@ -42,14 +43,14 @@ describe AppsController do
     it "assigns the requested app as @app" do
       app = App.create! valid_attributes
       get :show, {:id => app.to_param}, valid_session
-      assigns(:app).should eq(app)
+      expect(assigns(:app)).to eq(app)
     end
   end
 
   describe "GET new" do
     it "assigns a new app as @app" do
       get :new, {}, valid_session
-      assigns(:app).should be_a_new(App)
+      expect(assigns(:app)).to be_a_new(App)
     end
   end
 
@@ -57,7 +58,7 @@ describe AppsController do
     it "assigns the requested app as @app" do
       app = App.create! valid_attributes
       get :edit, {:id => app.to_param}, valid_session
-      assigns(:app).should eq(app)
+      expect(assigns(:app)).to eq(app)
     end
   end
 
@@ -71,29 +72,29 @@ describe AppsController do
 
       it "assigns a newly created app as @app" do
         post :create, {:app => valid_attributes}, valid_session
-        assigns(:app).should be_a(App)
-        assigns(:app).should be_persisted
+        expect(assigns(:app)).to be_a(App)
+        expect(assigns(:app)).to be_persisted
       end
 
       it "redirects to the created app" do
         post :create, {:app => valid_attributes}, valid_session
-        response.should redirect_to(App.last)
+        expect(response).to redirect_to(App.last)
       end
     end
 
     describe "with invalid params" do
       it "assigns a newly created but unsaved app as @app" do
         # Trigger the behavior that occurs when invalid params are submitted
-        App.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(App).to receive(:save).and_return(false)
         post :create, {:app => { "name" => "invalid value" }}, valid_session
-        assigns(:app).should be_a_new(App)
+        expect(assigns(:app)).to be_a_new(App)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
-        App.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(App).to receive(:save).and_return(false)
         post :create, {:app => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
+        expect(response).to render_template("new")
       end
     end
   end
@@ -106,20 +107,20 @@ describe AppsController do
         # specifies that the App created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        App.any_instance.should_receive(:update).with({ "name" => "MyString" })
+        expect_any_instance_of(App).to receive(:update).with({ "name" => "MyString" })
         put :update, {:id => app.to_param, :app => { "name" => "MyString" }}, valid_session
       end
 
       it "assigns the requested app as @app" do
         app = App.create! valid_attributes
         put :update, {:id => app.to_param, :app => valid_attributes}, valid_session
-        assigns(:app).should eq(app)
+        expect(assigns(:app)).to eq(app)
       end
 
       it "redirects to the app" do
         app = App.create! valid_attributes
         put :update, {:id => app.to_param, :app => valid_attributes}, valid_session
-        response.should redirect_to(app)
+        expect(response).to redirect_to(app)
       end
     end
 
@@ -127,17 +128,17 @@ describe AppsController do
       it "assigns the app as @app" do
         app = App.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        App.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(App).to receive(:save).and_return(false)
         put :update, {:id => app.to_param, :app => { "name" => "invalid value" }}, valid_session
-        assigns(:app).should eq(app)
+        expect(assigns(:app)).to eq(app)
       end
 
       it "re-renders the 'edit' template" do
         app = App.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
-        App.any_instance.stub(:save).and_return(false)
+        allow_any_instance_of(App).to receive(:save).and_return(false)
         put :update, {:id => app.to_param, :app => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+        expect(response).to render_template("edit")
       end
     end
   end
@@ -153,7 +154,7 @@ describe AppsController do
     it "redirects to the apps list" do
       app = App.create! valid_attributes
       delete :destroy, {:id => app.to_param}, valid_session
-      response.should redirect_to(apps_url)
+      expect(response).to redirect_to(apps_url)
     end
   end
 

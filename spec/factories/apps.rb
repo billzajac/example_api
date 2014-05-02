@@ -2,10 +2,10 @@
 
 FactoryGirl.define do
   factory :app do
-    name "MyString"
-    description "MyText"
-    author 1
-    price "MyString"
-    file_id "MyString"
+    sequence(:name) { |n| "Awesome VR App #{n}" }
+    description "A totally awesome VR app!"
+    author { "author_id_#{rand(0..9)}" }
+    price { "#{rand(0..9)}.#{rand(0..9)}#{rand(0..9)}" }
+    file_id "random_hash"
   end
 end
