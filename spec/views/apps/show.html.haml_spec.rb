@@ -7,9 +7,6 @@ describe "apps/show" do
       :description => "MyText",
       :author => "some_author",
       :price => "Price",
-      :file_name => "File",
-      #:file_data => "data",
-      :file_mime_type => "application/octet-stream"
     ))
   end
 
@@ -20,7 +17,5 @@ describe "apps/show" do
     expect(rendered).to match(/MyText/)
     expect(rendered).to match(/some_author/)
     expect(rendered).to match(/Price/)
-    expect(rendered).to match(/File/)
-    expect(rendered).to match(/application\/octet-stream/)
   end
 end

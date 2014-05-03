@@ -164,21 +164,21 @@ describe AppsController do
     end
   end
 
-  describe "GET download" do
-    describe "with valid params" do
-      it "downloads the requested app" do
-        app = App.create! valid_attributes
-        # Assuming there are no other apps in the database, this
-        # specifies that the App created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        get :download, {:id => app.to_param}, valid_session
-        expect(assigns(:app)).to eq(app)
-        #expect(response.filename).to eq(app.file_name)
-        #expect(response.mime_type).to eq(app.file_mime_type)
-        #expect(response.body).to eq(app.file_data)
-        expect(response.body).to eq("pending")
-      end
-    end
-  end
+  #describe "GET download" do
+  #  describe "with valid params" do
+  #    it "downloads the requested app" do
+  #      app = App.create! valid_attributes
+  #      # Assuming there are no other apps in the database, this
+  #      # specifies that the App created on the previous line
+  #      # receives the :update_attributes message with whatever params are
+  #      # submitted in the request.
+  #      get :download, {:id => app.to_param}, valid_session
+  #      expect(assigns(:app)).to eq(app)
+  #      #expect(response.filename).to eq(app.file_name)
+  #      #expect(response.mime_type).to eq(app.file_mime_type)
+  #      #expect(response.body).to eq(app.file_data)
+  #      expect(response.body).to eq("pending")
+  #    end
+  #  end
+  #end
 end
