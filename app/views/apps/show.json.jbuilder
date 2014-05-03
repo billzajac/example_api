@@ -1,1 +1,2 @@
-json.extract! @app, :id, :name, :description, :author, :price, :file_id, :created_at, :updated_at
+json.extract! @app, :id, :name, :description, :author, :price, :created_at, :updated_at
+json.binary_url @app.binary.url
