@@ -8,7 +8,7 @@ describe "apps/show" do
       :author => "some_author",
       :price => "Price",
       :file_name => "File",
-      :file_data => "data",
+      #:file_data => "data",
       :file_mime_type => "application/octet-stream"
     ))
   end

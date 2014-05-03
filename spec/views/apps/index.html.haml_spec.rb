@@ -9,7 +9,7 @@ describe "apps/index" do
         :author => "some_author",
         :price => "Price",
         :file_name => "File",
-        :file_data => "data",
+        #:file_data => "data",
         :file_mime_type => "application/octet-stream"
       ),
       stub_model(App,
@@ -18,7 +18,7 @@ describe "apps/index" do
         :author => "some_author",
         :price => "Price",
         :file_name => "File",
-        :file_data => "data",
+        #:file_data => "data",
         :file_mime_type => "application/octet-stream"
       )
     ])

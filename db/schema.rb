@@ -18,9 +18,7 @@ ActiveRecord::Schema.define(version: 20140502001159) do
     t.text     "description"
     t.string   "author"
     t.string   "price"
-    t.binary   "file_data"
-    t.string   "file_mime_type"
-    t.string   "file_name"
+    t.string   "binary"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

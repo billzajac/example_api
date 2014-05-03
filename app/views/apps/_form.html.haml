@@ -21,8 +21,11 @@
   /.field
   /  = f.label :file_name
   /  = f.text_field :file_name
+  /.field
+  /  = f.label :file_upload, "App File"
+  /  = f.file_field :file_upload
   .field
-    = f.label :file_upload, "App File"
-    = f.file_field :file_upload
+    = f.label :binary, "App Binary"
+    = f.file_field :binary
   .actions
     = f.submit 'Save'

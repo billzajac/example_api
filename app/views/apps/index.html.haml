@@ -6,8 +6,6 @@
     %th Description
     %th Author
     %th Price
-    %th File
-    %th File Mime Type
     %th
     %th
     %th
@@ -18,10 +16,8 @@
       %td= app.description
       %td= app.author
       %td= app.price
-      %td= app.file_name
-      %td= app.file_mime_type
       %td= link_to 'Show', app
-      %td= link_to 'Download', download_app_path(app)
+      %td= link_to 'Download', app.binary.url
       %td= link_to 'Edit', edit_app_path(app)
       %td= link_to 'Destroy', app, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

@@ -1,5 +1,6 @@
 class App < ActiveRecord::Base
-  validates :name, :description, :price, :author, :file_data, :file_name, :file_mime_type, :presence => true
+  validates :name, :description, :price, :author, :presence => true
+  mount_uploader :binary, BinaryUploader
 
   #before_save :upload_file
   #before_destroy :destroy_file
