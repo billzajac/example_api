@@ -1,0 +1,15 @@
+# Ladyhawke App Store API
+
+# GET /apps.json
+         POST   /apps(.:format)          apps#create
+ new_app GET    /apps/new(.:format)      apps#new
+edit_app GET    /apps/:id/edit(.:format) apps#edit
+     app GET    /apps/:id(.:format)      apps#show
+         PATCH  /apps/:id(.:format)      apps#update
+         PUT    /apps/:id(.:format)      apps#update
+         DELETE /apps/:id(.:format)      apps#destroy
+
+## GET /message
++ Response 200 (text/plain)
+
+        Hello World!
