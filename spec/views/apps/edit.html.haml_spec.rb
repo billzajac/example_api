@@ -7,7 +7,7 @@ describe "apps/edit" do
       :description => "MyText",
       :author => "some_author",
       :price => "MyString",
-      :binary => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.txt'), 'text/plain')
+      :binary => Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/testfile1.txt'), 'text/plain')
     ))
   end
 
