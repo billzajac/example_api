@@ -17,7 +17,8 @@
       %td= app.author
       %td= app.price
       %td= link_to 'Show', app
-      %td= link_to 'Download', app.binary.url
+      - if app.binary
+        %td= link_to 'Download', app.binary.url.to_s
       %td= link_to 'Edit', edit_app_path(app)
       %td= link_to 'Destroy', app, :method => :delete, :data => { :confirm => 'Are you sure?' }
 

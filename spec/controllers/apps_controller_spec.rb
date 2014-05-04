@@ -25,7 +25,6 @@ describe AppsController do
   # adjust the attributes here as well.
   #let(:valid_attributes) { { "name" => "MyString" } }
   let(:valid_attributes) { attributes_for(:app) }
-  let(:valid_params) { attributes_for(:app).merge(file_upload: Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.txt'), 'text/plain')) }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -67,18 +66,18 @@ describe AppsController do
     describe "with valid params" do
       it "creates a new App" do
         expect {
-          post :create, {:app => valid_params}, valid_session
+          post :create, {:app => valid_attributes}, valid_session
         }.to change(App, :count).by(1)
       end
 
       it "assigns a newly created app as @app" do
-        post :create, {:app => valid_params}, valid_session
+        post :create, {:app => valid_attributes}, valid_session
         expect(assigns(:app)).to be_a(App)
         expect(assigns(:app)).to be_persisted
       end
 
       it "redirects to the created app" do
-        post :create, {:app => valid_params}, valid_session
+        post :create, {:app => valid_attributes}, valid_session
         expect(response).to redirect_to(App.last)
       end
     end
@@ -114,18 +113,13 @@ describe AppsController do
 
       it "assigns the requested app as @app" do
         app = App.create! valid_attributes
-        expect(app.file_name).to eq(valid_attributes[:file_name])
-        put :update, {:id => app.to_param, :app => valid_params}, valid_session
+        put :update, {:id => app.to_param, :app => valid_attributes}, valid_session
         expect(assigns(:app)).to eq(app)
-        # Now reload and make sure the upload worked
-        app.reload
-        expect(app.file_name).not_to eq(valid_attributes[:file_name])
-        expect(app.file_name).to eq("test.txt")
       end
 
       it "redirects to the app" do
         app = App.create! valid_attributes
-        put :update, {:id => app.to_param, :app => valid_params}, valid_session
+        put :update, {:id => app.to_param, :app => valid_attributes}, valid_session
         expect(response).to redirect_to(app)
       end
     end

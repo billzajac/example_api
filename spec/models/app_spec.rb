@@ -20,9 +20,4 @@ describe App do
   it "is invalid without a price" do
     expect(build(:app, price: nil)).not_to be_valid
   end
-
-  it "uploads the binary to s3" do
-    #expect(build(:app, file_name: nil)).not_to be_valid
-    pending
-  end
 end

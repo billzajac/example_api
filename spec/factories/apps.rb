@@ -6,6 +6,9 @@ FactoryGirl.define do
     description "A totally awesome VR app!"
     author { "author_id_#{rand(0..9)}" }
     price { "#{rand(0..9)}.#{rand(0..9)}#{rand(0..9)}" }
-    binary { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/test.txt'), 'text/plain') }
+
+    trait :with_binary do
+      binary { Rack::Test::UploadedFile.new(Rails.root.join('spec/fixtures/testfile1.txt'), 'text/plain') }
+    end
   end
 end
