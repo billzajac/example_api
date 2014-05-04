@@ -14,8 +14,25 @@
             User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
             Host:ladyhawke-apps.herokuapp.com
             Accept:application/json
+            X-Page: 3
+            X-Per-Page: 10
+            X-Sorted-By: name
+            X-Sorted-Order: asc
+            X-Search-Regex: foo
+            X-Search-Attr: name
 
 + Response 200 (application/json)
+
+    + Headers
+
+            X-Sorted-By: name
+            X-Sorted-Order: asc
+            X-Total: 42
+            X-Total-Pages: 5
+            X-Page: 3
+            X-Per-Page: 10
+
+    + Body
 
             [{"id":5,"name":"sdf","description":"wer","author":"sdf","price":"2","url":"http://localhost:8080/apps/5"},{"id":6,"name":"wer","description":"ert","author":"we","price":"3","url":"http://localhost:8080/apps/6"}
 
