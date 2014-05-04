@@ -1,15 +1,99 @@
 # Ladyhawke App Store API
 
-# GET /apps.json
-         POST   /apps(.:format)          apps#create
- new_app GET    /apps/new(.:format)      apps#new
-edit_app GET    /apps/:id/edit(.:format) apps#edit
-     app GET    /apps/:id(.:format)      apps#show
-         PATCH  /apps/:id(.:format)      apps#update
-         PUT    /apps/:id(.:format)      apps#update
-         DELETE /apps/:id(.:format)      apps#destroy
+## Apps Collection [/apps]
 
-## GET /message
-+ Response 200 (text/plain)
+### Retrieve the list of all apps [GET]
 
-        Hello World!
++ Example
+
+            curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            [{"id":5,"name":"sdf","description":"wer","author":"sdf","price":"2","url":"http://localhost:8080/apps/5"},{"id":6,"name":"wer","description":"ert","author":"we","price":"3","url":"http://localhost:8080/apps/6"}
+
+
+### Create a new app [POST]
+
++ Example
+
+            curl -v -H "Accept: application/json" -F "app[name]=app3" -F "app[description]=This is a description" -F "app[author]=some guy" -F "app[price]=0.99" -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game.app" http://ladyhawke-apps.herokuapp.com/apps
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 201 (application/json)
+
+            {"id":9,"name":"app3","description":"This is a description","author":"some guy","price":"0.99","created_at":"2014-05-04T18:21:46.574Z","updated_at":"2014-05-04T18:21:46.574Z","binary_url":"https://oculus-app-store.s3.amazonaws.com/uploads/1399227706-83089-8859/my_awesome_game.app"}
+
+
+## A single app [/apps/{id}]
+
++ Parameters
+    + id (string, `1`) ... The id of the App
+
+### Retrieve a single app [GET]
+
++ Example
+
+            curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps/5
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            {"id":5,"name":"sdf","description":"wer","author":"sdf","price":"2","created_at":"2014-05-04T03:25:58.055Z","updated_at":"2014-05-04T03:25:58.055Z","binary_url":"https://oculus-app-store.s3.amazonaws.com/uploads/1399173958-80092-9622/my_awesome_game.app"}
+
+
+### Update an existing app [PATCH]
+
++ Note
+
+  Alias: PUT
+
++ Example
+            # NOTE: The binary_url will not change, but the binary will be replaced
+            curl -v -H "Accept: application/json" -X PUT -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game2.app"  http://ladyhawke-apps.herokuapp.com/apps/9
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            {"id":9,"name":"app3","description":"This is a description","author":"some guy","price":"0.99","created_at":"2014-05-04T18:21:46.574Z","updated_at":"2014-05-04T18:21:46.574Z","binary_url":"https://oculus-app-store.s3.amazonaws.com/uploads/1399227706-83089-8859/my_awesome_game.app"}
+
+
+### Delete an app [DELETE]
+
++ Example
+
+            curl -v -H "Accept: application/json" -X DELETE http://ladyhawke-apps.herokuapp.com/apps/9
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 204
