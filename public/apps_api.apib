@@ -8,12 +8,12 @@
 
 Search, sort, and pagination are all handled by setting values in the following headers.
 
-            X-Page: 3
-            X-Per-Page: 10
-            X-Sorted-By: name
-            X-Sorted-Order: asc
-            X-Search-Regex: foo
-            X-Search-Attr: name
+            X-Page: page_number_based_on_per_page_value
+            X-Per-Page: number_of_records_to_return_per_query
+            X-Sorted-By: [id|name|description|author|price]
+            X-Sorted-Order: [asc|dsc]
+            X-Search-Regex: substring_to_match
+            X-Search-Attr: [id|name|description|author|price]
 
 + Example
 

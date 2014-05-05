@@ -99,12 +99,12 @@ a.list-group-item.heading {
 <li>Search / Sort Pagination</li>
 </ul>
 <p>Search, sort, and pagination are all handled by setting values in the following headers.</p>
-<pre><code>        <span class="hljs-attribute">X-Page</span>: <span class="hljs-string">3</span>
-        <span class="hljs-attribute">X-Per-Page</span>: <span class="hljs-string">10</span>
-        <span class="hljs-attribute">X-Sorted-By</span>: <span class="hljs-string">name</span>
-        <span class="hljs-attribute">X-Sorted-Order</span>: <span class="hljs-string">asc</span>
-        <span class="hljs-attribute">X-Search-Regex</span>: <span class="hljs-string">foo</span>
-        <span class="hljs-attribute">X-Search-Attr</span>: <span class="hljs-string">name</span>
+<pre><code>        <span class="hljs-attribute">X-Page</span>: <span class="hljs-string">page_number_based_on_per_page_value</span>
+        <span class="hljs-attribute">X-Per-Page</span>: <span class="hljs-string">number_of_records_to_return_per_query</span>
+        <span class="hljs-attribute">X-Sorted-By</span>: <span class="hljs-string">[id|name|description|author|price]</span>
+        <span class="hljs-attribute">X-Sorted-Order</span>: <span class="hljs-string">[asc|dsc]</span>
+        <span class="hljs-attribute">X-Search-Regex</span>: <span class="hljs-string">substring_to_match</span>
+        <span class="hljs-attribute">X-Search-Attr</span>: <span class="hljs-string">[id|name|description|author|price]</span>
 </code></pre><ul>
 <li><p>Example</p>
 <pre><code>  curl <span class="hljs-attribute">-v</span> <span class="hljs-attribute">-H</span> <span class="hljs-string">"Accept: application/json"</span> http:<span class="hljs-comment">//ladyhawke-apps.herokuapp.com/apps</span>
