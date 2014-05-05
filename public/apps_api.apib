@@ -1,0 +1,290 @@
+# Ladyhawke App Store API
+
+## Apps Collection [/apps]
+
+### Get the list of apps [GET]
+
++ Search / Sort Pagination
+
+Search, sort, and pagination are all handled by setting values in the following headers.
+
+            X-Page: 3
+            X-Per-Page: 10
+            X-Sorted-By: name
+            X-Sorted-Order: asc
+            X-Search-Regex: foo
+            X-Search-Attr: name
+
++ Example
+
+            curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+            X-Page: 3
+            X-Per-Page: 10
+            X-Sorted-By: name
+            X-Sorted-Order: asc
+            X-Search-Regex: foo
+            X-Search-Attr: name
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Sorted-By: name
+            X-Sorted-Order: asc
+            X-Total: 42
+            X-Total-Pages: 5
+            X-Page: 3
+            X-Per-Page: 10
+
+    + Body
+
+            [{"id":5,
+              "name":"sdf",
+              "description":"wer",
+              "author":"sdf",
+              "price":"2",
+              "url":"http://localhost:8080/apps/5"},
+             {"id":6,
+              "name":"wer",
+              "description":"ert",
+              "author":"we",
+              "price":"3",
+              "url":"http://localhost:8080/apps/6"}]
+
+
+### Create a new app [POST]
+
++ Example
+
+            curl -v -H "Accept: application/json" -F "app[name]=app3" -F "app[description]=This is a description" -F "app[author]=some guy" -F "app[price]=0.99" -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game.app" http://ladyhawke-apps.herokuapp.com/apps
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 201 (application/json)
+
+            {"id":9,
+             "name":"app3",
+             "description":"This is a description",
+             "author":"some guy",
+             "price":"0.99",
+             "created_at":"2014-05-04T18:21:46.574Z",
+             "updated_at":"2014-05-04T18:21:46.574Z",
+             "binary_url":"https://oculus-app-store.s3.amazonaws.com/uploads/1399227706-83089-8859/my_awesome_game.app"}
+
+
+## A single app [/apps/{id}]
+
++ Parameters
+    + id (string, `1`) ... The id of the App
+
+### Get a single app [GET]
+
++ Example
+
+            curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps/5
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            {"id":5,
+             "name":"sdf",
+             "description":"wer",
+             "author":"sdf",
+             "price":"2",
+             "created_at":"2014-05-04T03:25:58.055Z",
+             "updated_at":"2014-05-04T03:25:58.055Z",
+             "binary_url":"https://oculus-app-store.s3.amazonaws.com/uploads/1399173958-80092-9622/my_awesome_game.app"}
+
+
+### Update an existing app [PATCH]
+
++ Note: PUT is an alias for PATCH
+
++ Example
+            # NOTE: The binary_url will not change, but the binary will be replaced
+            curl -v -H "Accept: application/json" -X PUT -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game2.app"  http://ladyhawke-apps.herokuapp.com/apps/9
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            {"id":9,
+             "name":"app3",
+             "description":"This is a description",
+             "author":"some guy",
+             "price":"0.99",
+             "created_at":"2014-05-04T18:21:46.574Z",
+             "updated_at":"2014-05-04T18:21:46.574Z",
+             "binary_url":"https://oculus-app-store.s3.amazonaws.com/uploads/1399227706-83089-8859/my_awesome_game.app"}
+
+
+### Delete an app [DELETE]
+
++ Example
+
+            curl -v -H "Accept: application/json" -X DELETE http://ladyhawke-apps.herokuapp.com/apps/9
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 204
+
+## Comments Collection [/apps/{id}/comments]
+
++ Parameters
+    + id (string, `1`) ... The id of the App
+
+### Get the list of comments for an app [GET]
+
++ Example
+
+            curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps/9/comments
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+            X-Page: 3
+            X-Per-Page: 10
+            X-Sorted-By: user
+            X-Sorted-Order: asc
+
++ Response 200 (application/json)
+
+    + Headers
+
+            X-Sorted-By: user
+            X-Sorted-Order: asc
+            X-Total: 42
+            X-Total-Pages: 5
+            X-Page: 3
+            X-Per-Page: 10
+
+    + Body
+
+            [{"id":5,
+              "author":"foo",
+              "comment":"this app really is awesome",
+              "url":"http://localhost:8080/comments/5"},
+             {"id":6,
+              "author":"bar",
+              "comment":"i can't put this thing down",
+              "url":"http://localhost:8080/comments/6"}]
+
+
+### Create a new comment [POST]
+
++ Example
+
+            curl -v -H "Accept: application/json" -F "comment[author]=foo" -F "app[comment]=This is my comment" http://ladyhawke-apps.herokuapp.com/apps/9/comment
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 201 (application/json)
+
+            {"id":9,
+             "author":"foo",
+             "comment":"This is my commetn",
+             "created_at":"2014-05-04T18:21:46.574Z",
+             "updated_at":"2014-05-04T18:21:46.574Z"}
+
+
+## A single comment [/comments/{id}]
+
++ Parameters
+    + id (string, `1`) ... The id of the Comment
+
+### Get a single app [GET]
+
++ Example
+
+            curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/comments/5
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            {"id":5,
+             "author":"foo",
+             "comment":"who could love this more than me?",
+             "created_at":"2014-05-04T03:25:58.055Z",
+             "updated_at":"2014-05-04T03:25:58.055Z"}
+
+
+### Update an existing app [PATCH]
+
++ Note: PUT is an alias for PATCH
+
++ Example
+            # NOTE: The binary_url will not change, but the binary will be replaced
+            curl -v -H "Accept: application/json" -X PUT -F "app[comment]=i meant that i love, not like this"  http://ladyhawke-apps.herokuapp.com/comments/5
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 200 (application/json)
+
+            {"id":5,
+             "author":"foo",
+             "comment":"i meant that i love, not like this",
+             "created_at":"2014-05-04T18:21:46.574Z",
+             "updated_at":"2014-05-04T18:21:46.574Z"}
+
+
+### Delete an app [DELETE]
+
++ Example
+
+            curl -v -H "Accept: application/json" -X DELETE http://ladyhawke-apps.herokuapp.com/comments/5
+
++ Request
+    + Headers
+
+            User-Agent:curl/7.24.0 (x86_64-apple-darwin12.0) libcurl/7.24.0 OpenSSL/0.9.8x zlib/1.2.5
+            Host:ladyhawke-apps.herokuapp.com
+            Accept:application/json
+
++ Response 204

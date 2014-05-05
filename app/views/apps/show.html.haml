@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @app.name
+%p
+  %b Description:
+  = @app.description
+%p
+  %b Author:
+  = @app.author
+%p
+  %b Price:
+  = @app.price
+
+- unless @app.binary.nil?
+  = link_to 'Download', @app.binary.url.to_s
+  \|
+= link_to 'Edit', edit_app_path(@app)
+\|
+= link_to 'Back', apps_path
