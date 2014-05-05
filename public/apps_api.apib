@@ -4,20 +4,20 @@
 
 ### Get the list of apps [GET]
 
-+ Search / Sort Pagination
-
-Search, sort, and pagination are all handled by setting values in the following headers.
-
-            X-Page: page_number_based_on_per_page_value
-            X-Per-Page: number_of_records_to_return_per_query
-            X-Sorted-By: [id|name|description|author|price]
-            X-Sorted-Order: [asc|dsc]
-            X-Search-Regex: substring_to_match
-            X-Search-Attr: [id|name|description|author|price]
-
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps
+
++ Search / Sort Pagination
+
+      Search, sort, and pagination are all handled by setting values in the following headers.
+
+        * X-Page: page_number_based_on_per_page_value
+        * X-Per-Page: number_of_records_to_return_per_query
+        * X-Sorted-By: [id|name|description|author|price]
+        * X-Sorted-Order: [asc|dsc]
+        * X-Search-Regex: substring_to_match
+        * X-Search-Attr: [id|name|description|author|price]
 
 + Request
     + Headers
@@ -61,7 +61,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Create a new app [POST]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" -F "app[name]=app3" -F "app[description]=This is a description" -F "app[author]=some guy" -F "app[price]=0.99" -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game.app" http://ladyhawke-apps.herokuapp.com/apps
 
@@ -91,7 +91,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Get a single app [GET]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps/5
 
@@ -118,7 +118,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 + Note: PUT is an alias for PATCH
 
-+ Example
++ Example curl
             # NOTE: The binary_url will not change, but the binary will be replaced
             curl -v -H "Accept: application/json" -X PUT -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game2.app"  http://ladyhawke-apps.herokuapp.com/apps/9
 
@@ -143,7 +143,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Delete an app [DELETE]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" -X DELETE http://ladyhawke-apps.herokuapp.com/apps/9
 
@@ -163,7 +163,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Get the list of comments for an app [GET]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/apps/9/comments
 
@@ -203,7 +203,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Create a new comment [POST]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" -F "comment[author]=foo" -F "app[comment]=This is my comment" http://ladyhawke-apps.herokuapp.com/apps/9/comment
 
@@ -230,7 +230,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Get a single comment [GET]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" http://ladyhawke-apps.herokuapp.com/comments/5
 
@@ -254,7 +254,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 + Note: PUT is an alias for PATCH
 
-+ Example
++ Example curl
             # NOTE: The binary_url will not change, but the binary will be replaced
             curl -v -H "Accept: application/json" -X PUT -F "app[comment]=i meant that i love, not like this"  http://ladyhawke-apps.herokuapp.com/comments/5
 
@@ -276,7 +276,7 @@ Search, sort, and pagination are all handled by setting values in the following 
 
 ### Delete an comment [DELETE]
 
-+ Example
++ Example curl
 
             curl -v -H "Accept: application/json" -X DELETE http://ladyhawke-apps.herokuapp.com/comments/5
 
