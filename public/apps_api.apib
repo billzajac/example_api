@@ -2,7 +2,18 @@
 
 ## Apps Collection [/apps]
 
-### Retrieve the list of all apps [GET]
+### Get the list of apps [GET]
+
++ Search / Sort Pagination
+
+Search, sort, and pagination are all handled by setting values in the following headers.
+
+            X-Page: 3
+            X-Per-Page: 10
+            X-Sorted-By: name
+            X-Sorted-Order: asc
+            X-Search-Regex: foo
+            X-Search-Attr: name
 
 + Example
 
@@ -78,7 +89,7 @@
 + Parameters
     + id (string, `1`) ... The id of the App
 
-### Retrieve a single app [GET]
+### Get a single app [GET]
 
 + Example
 
@@ -150,7 +161,7 @@
 + Parameters
     + id (string, `1`) ... The id of the App
 
-### Retrieve the list of all comments for an app [GET]
+### Get the list of comments for an app [GET]
 
 + Example
 
@@ -217,7 +228,7 @@
 + Parameters
     + id (string, `1`) ... The id of the Comment
 
-### Retrieve a single app [GET]
+### Get a single app [GET]
 
 + Example
 
