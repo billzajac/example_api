@@ -15,11 +15,24 @@ describe "Apps" do
       expect(response.status).to be(200)
     end
   end
-  it "uploads the binary to s3 for a new app" do
-    #post new_app_path, {:app => valid_attributes}, valid_session
-    post '/apps', {:app => valid_attributes}
-    url = App.first.binary.url
-    App.destroy_all
-    expect(File.basename(url)).to eq('testfile1.txt')
+
+  describe "POST /apps" do
+    it "uploads the binary to s3 for a new app" do
+      #post new_app_path, {:app => valid_attributes}, valid_session
+      post '/apps', {:app => valid_attributes}
+      url = App.first.binary.url
+      App.destroy_all
+      expect(File.basename(url)).to eq('testfile1.txt')
+    end
+
+    it "JSON data as input works too" do
+      # Note: Can't send the binary as JSON
+      params = {:app => valid_attributes}
+      #post '/apps', params.to_json, format: :json
+      post '/apps', params.to_json, {'ACCEPT' => "application/json", 'CONTENT_TYPE' => 'application/json'}
+      latest_name = App.last.name
+      App.destroy_all
+      expect(latest_name).to eq(valid_attributes[:name])
+    end
   end
 end

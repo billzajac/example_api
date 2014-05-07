@@ -63,7 +63,13 @@
 
 + Example curl
 
+    * To attach the application binary, you need to use multipart/form-data style request
+
             curl -v -H "Accept: application/json" -F "app[name]=app3" -F "app[description]=This is a description" -F "app[author]=some guy" -F "app[price]=0.99" -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game.app" http://ladyhawke-apps.herokuapp.com/apps
+
+    * If you do not need to attach the application binary, you can simply send JSON data
+
+            curl -H "Content-Type: application/json" -H "Accept: application/json" -d "{\"app\":{\"name\":\"app7\",\"description\":\"This is a description\",\"author\":\"some guy\",\"price\":\"0.99\"}}" http://ladyhawke-apps.herokuapp.com/apps
 
 + Request
     + Headers
@@ -119,9 +125,14 @@
 + Note: PUT is an alias for PATCH
 
 + Example curl
+
+    * To send the application binary, you need to use multipart/form-data style request
             # NOTE: The binary_url will not change, but the binary will be replaced
             curl -v -H "Accept: application/json" -X PUT -F "app[binary]=@/Users/zajaw002/Downloads/my_awesome_game2.app"  http://ladyhawke-apps.herokuapp.com/apps/9
 
+    * If you do not need to update the application binary, you can simply send JSON data
+
+            curl -v -H "Content-Type: application/json" -H "Accept: application/json" -X PUT -d "{\"app\":{\"name\":\"some other app name\",\"description\":\"This is a new description\"}}" http://ladyhawke-apps.herokuapp.com/apps/9
 + Request
     + Headers
 
